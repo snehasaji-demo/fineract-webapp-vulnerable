@@ -19,10 +19,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@0ad4617b417d118529c1a0a529f2a74471016a4a
 
       - name: Use Node.js 24
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@64edc717d5919d0858705f2772a68d8a841e6140
         with:
           node-version: '24.16.0'
 
@@ -35,7 +35,7 @@ jobs:
       - name: Fallback – Clean install with regenerated lockfile
         if: failure()
         run: |
-          echo "npm ci failed — regenerating lockfile and retrying"
+          echo "npm ci failed – regenerating lockfile and retrying"
           rm -rf node_modules package-lock.json
           npm install
 
@@ -75,7 +75,7 @@ jobs:
             exit 0
           fi
 
-          echo "📋 Checking $(echo "$CHANGED_FILES" | wc -l) changed file(s)..."
+          echo "📊 Checking $(echo "$CHANGED_FILES" | wc -l) changed file(s)..."
           echo "$CHANGED_FILES" | xargs node scripts/check-file-headers.js
 
       - name: Run production build
